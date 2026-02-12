@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def error(sol, sol_ref, eps, mesh, tag, save_tag):
+def error(sol, sol_ref, eps, mesh, tag, save_tag=None):
 
     if tag == "scalar":
 
@@ -13,9 +13,6 @@ def error(sol, sol_ref, eps, mesh, tag, save_tag):
         print("")
         print(f"  * Max. absolute error : {abs_error_max:.3e}.")
         print(f"  * Avg. absolute error : {abs_error_mean:.3e}.")
-        
-        mesh[f"abs_error_{save_tag}"] = abs_error
-
 
         denom = np.abs(sol_ref)
         num = np.abs(sol - sol_ref)
@@ -29,7 +26,10 @@ def error(sol, sol_ref, eps, mesh, tag, save_tag):
         print(f"  * Max. relative error : {rel_error_max:.3e} %.")
         print(f"  * Avg. relative error : {rel_error_mean:.3e} %.")
         
-        mesh[f"rel_error_{save_tag}"] = rel_error
+        
+        if save_tag != None:
+            mesh[f"abs_error_{save_tag}"] = abs_error
+            mesh[f"rel_error_{save_tag}"] = rel_error
 
     elif tag == "vector":
 
@@ -68,7 +68,8 @@ def error(sol, sol_ref, eps, mesh, tag, save_tag):
             rel_error[:, i] = rel_error_dir
             
         
-        mesh[f"abs_error_{save_tag}"] = abs_error
-        mesh[f"rel_error_{save_tag}"] = rel_error
+        if save_tag != None:
+            mesh[f"abs_error_{save_tag}"] = abs_error
+            mesh[f"rel_error_{save_tag}"] = rel_error
 
     return mesh

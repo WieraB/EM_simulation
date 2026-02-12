@@ -32,6 +32,11 @@
     fec_type = RT
     fec_order = CONSTANT
   []
+  [H1FESpace]
+    type = MFEMVectorFESpace
+    fec_type = H1
+    fec_order = FIRST
+  []
 []
 
 [Variables]
@@ -50,6 +55,10 @@
     type = MFEMVariable
     fespace = HDivFESpace
   []
+  [a_field_h1]
+    type = MFEMVariable
+    fespace = H1FESpace
+  []
 []
 
 [AuxKernels]
@@ -59,6 +68,11 @@
     source = a_field
     scale_factor = 1.0
     execute_on = TIMESTEP_END
+  []
+  [a_field_h1]
+    type = MFEMVectorProjectionAux
+    variable = a_field_h1
+    vector_coefficient = a_field
   []
 []
 
@@ -76,7 +90,7 @@
   [mass]
     type = MFEMVectorFEMassKernel
     variable = a_field
-    coefficient = 1e-3
+    coefficient = 1e-7
   []
   [curlcurl]
     type = MFEMCurlCurlKernel
@@ -95,12 +109,18 @@
   [ams]
     type = MFEMHypreAMS
     fespace = HCurlFESpace
+    singular = true
+  []
+  [boomeramg]
+    type = MFEMHypreBoomerAMG
+    fespace = HCurlFESpace
   []
 []
 
 [Solver]
-  type = MFEMHypreGMRES
-  preconditioner = ams
+  type = MFEMHypreFGMRES
+  # preconditioner = ams
+  # preconditioner = boomeramg
   l_tol = 1e-6
   l_max_its = 100
 []

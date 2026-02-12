@@ -64,8 +64,9 @@ print()
 
 sim_data = pv.read(input_path + "OutputData/CoilMagnetostatic/Run0/Cycle000001/proc000000.vtu")
 
-sim_data.rename_array('a_field', 'magnetic_vector_potential')
+sim_data.rename_array('a_field', 'magnetic_vector_potential_nd')
 sim_data.rename_array('b_field', 'magnetic_flux_density')
+sim_data.rename_array('a_field_h1', 'magnetic_vector_potential')
 
 sim_data.save(output_path)
 

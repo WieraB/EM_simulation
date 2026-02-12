@@ -94,7 +94,7 @@ sigma_coil = 62.83185 # Coil's electric conductivity [S/m]
     type = MFEMGradAux
     variable = submesh_current_density
     source = submesh_potential
-    scale_factor = -${sigma_coil}
+    scale_factor = ${sigma_coil}
     execute_on = TIMESTEP_END
   []
 []
