@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def error(sol, sol_ref, eps, mesh, tag, save_tag=None):
+def error(sol, sol_ref, eps, mesh, tag, save_tag=None, save_tag_array=None):
 
     if tag == "scalar":
 
@@ -30,6 +30,9 @@ def error(sol, sol_ref, eps, mesh, tag, save_tag=None):
         if save_tag != None:
             mesh[f"abs_error_{save_tag}"] = abs_error
             mesh[f"rel_error_{save_tag}"] = rel_error
+        
+        if save_tag_array != None:
+            mesh = np.concatenate((mesh, rel_error), axis=1)
 
     elif tag == "vector":
 
@@ -71,5 +74,8 @@ def error(sol, sol_ref, eps, mesh, tag, save_tag=None):
         if save_tag != None:
             mesh[f"abs_error_{save_tag}"] = abs_error
             mesh[f"rel_error_{save_tag}"] = rel_error
+
+        if save_tag_array != None:
+            mesh = np.concatenate((mesh, rel_error), axis=1)
 
     return mesh

@@ -165,10 +165,35 @@ sigma_coil = 62.83185 # Coil's electric conductivity [S/m]
 #   []
 # []
 
+[VectorPostprocessors]
+  [point_sample_electric_potential]
+    type = MFEMPointValueSampler
+    variable = 'electric_potential'
+    points = '0 0 0'
+    execute_on = TIMESTEP_END
+    execution_order_group = 3
+  []
+  [point_sample_current_density]
+    type = MFEMPointValueSampler
+    variable = 'current_density'
+    points = '0 0 0'
+    execute_on = TIMESTEP_END
+    execution_order_group = 4
+  []
+[]
+
 [Outputs]
   [VacuumParaViewDataCollection]
     type = MFEMParaViewDataCollection
     file_base = OutputData
     vtk_format = ASCII
+  []
+[]
+
+[Outputs]
+[txt_output]
+    type = CSV
+    file_base = OutputData/CoilMagnetostatic/gauss/gauss
+    execute_on = 'FINAL'
   []
 []

@@ -7,7 +7,7 @@
   [mu0_inv]
     # Inverse of vacuum  permeability with the units [N/A^2]
     type = ParsedFunction
-    expression = '1/(4*pi*1e-7)'
+    expression = '1/1' # This can be amended to define the correct value.
   []
 []
 
@@ -59,6 +59,10 @@
     type = MFEMVariable
     fespace = H1FESpace
   []
+  [b_field_h1]
+    type = MFEMVariable
+    fespace = H1FESpace
+  []
 []
 
 [AuxKernels]
@@ -68,11 +72,18 @@
     source = a_field
     scale_factor = 1.0
     execute_on = TIMESTEP_END
+    execution_order_group = 1
   []
   [a_field_h1]
     type = MFEMVectorProjectionAux
     variable = a_field_h1
     vector_coefficient = a_field
+  []
+  [b_field_h1]
+    type = MFEMVectorProjectionAux
+    variable = b_field_h1
+    vector_coefficient = b_field
+    execution_order_group = 4
   []
 []
 
@@ -80,9 +91,7 @@
   [tangential_a_bdr]
     type = MFEMVectorTangentialDirichletBC
     variable = a_field
-    # boundary = 'Side1 Side2 Side3 Side4 Side5 Side6'
-    boundary = '1 2 3 4 5 12'
-    # boundary = ''
+    boundary = 'CoilIn CoilOut 1 2 3 4 5 12'
   []
 []
 
@@ -109,20 +118,15 @@
   [ams]
     type = MFEMHypreAMS
     fespace = HCurlFESpace
-    singular = true
-  []
-  [boomeramg]
-    type = MFEMHypreBoomerAMG
-    fespace = HCurlFESpace
+    # singular = true # It's not needed here as the mass term is added.
   []
 []
 
 [Solver]
   type = MFEMHypreFGMRES
-  # preconditioner = ams
-  # preconditioner = boomeramg
+  preconditioner = ams
   l_tol = 1e-6
-  l_max_its = 100
+  l_max_its = 500
 []
 
 [Executioner]
@@ -147,10 +151,35 @@
   []
 []
 
+[VectorPostprocessors]
+  [point_sample_a]
+    type = MFEMPointValueSampler
+    variable = 'a_field'
+    points = '0 0 0'
+    execute_on = TIMESTEP_END
+    execution_order_group = 2
+  []
+  [point_sample_b]
+    type = MFEMPointValueSampler
+    variable = 'b_field'
+    points = '0 0 0'
+    execute_on = TIMESTEP_END
+    execution_order_group = 3
+  []
+[]
+
 [Outputs]
   [ParaViewDataCollection]
     type = MFEMParaViewDataCollection
     file_base = OutputData/CoilMagnetostatic
     vtk_format = ASCII
+  []
+[]
+
+[Outputs]
+[txt_output]
+    type = CSV
+    file_base = OutputData/CoilMagnetostatic/gauss/gauss
+    execute_on = 'FINAL'
   []
 []

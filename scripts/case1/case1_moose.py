@@ -20,8 +20,38 @@ mesh_name = "coil_box_named.msh"
 
 mesh_path = "../../meshes/"
 output_path = f"../../output/{case_name}/{case_name}_moose.vtu"
+output_path2 = f"../../output/{case_name}/gauss/{case_name}_moose.npy"
 input_file_path = f"../../input_moose/{case_name}/{case_name}.i"
+input_file_path_copy = f"../../input_moose/{case_name}/{case_name}_copy.i"
 input_path = f"../../input_moose/{case_name}/"
+
+gauss_coords = np.load(f"../../output/case2/gauss/case2_ngsolve.npy")[:, 0:3]
+gauss_coords_vec = np.zeros((gauss_coords.shape[0]*3))
+
+for i in range(gauss_coords.shape[0]):
+    gauss_coords_vec[i*3 + 0] = gauss_coords[i, 0]
+    gauss_coords_vec[i*3 + 1] = gauss_coords[i, 1]
+    gauss_coords_vec[i*3 + 2] = gauss_coords[i, 2]
+
+np.savetxt(f'{input_path}/gauss_points.txt', gauss_coords_vec, delimiter=' ', newline=' ')
+
+# gauss_coords_vec = gauss_coords_vec[:300]
+
+gauss_coords_string = ' '.join(map(str, gauss_coords_vec))
+
+# new_value = "    points = '0 0 0 0.01 0 0'\n"
+new_value = f"    points = '{gauss_coords_string}'\n"
+with open(input_file_path, 'r') as file:
+    lines = file.readlines()
+
+for i, line in enumerate(lines):
+    if "points =" in line:
+        lines[i] = new_value
+        # break
+    
+with open(input_file_path_copy, 'w') as file:
+    file.writelines(lines)
+
 
 mesh_file_path = mesh_path + mesh_name
 mesh_file_path_moose = input_path + mesh_name
@@ -38,7 +68,7 @@ moose_runner.set_run_opts(n_tasks = 1,
                           n_threads = 1,
                           redirect_out = False)
 
-moose_input = Path(input_file_path) # It actually works now :)
+moose_input = Path(input_file_path_copy) # It actually works now :)
 
 moose_runner.set_input_file(moose_input)
 
@@ -97,3 +127,20 @@ res["electric_potential"] = sol1
 res["current_density"] = sol2
 
 res.save(output_path)
+
+
+sim_data_curr_dens = np.genfromtxt(input_path + "OutputData/CoilMagnetostatic/gauss/gauss_point_sample_current_density_0001.csv", delimiter = ",", skip_header=1)
+sim_data_elec_pot = np.genfromtxt(input_path + "OutputData/CoilMagnetostatic/gauss/gauss_point_sample_electric_potential_0001.csv", delimiter = ",", skip_header=1)
+
+print(sim_data_curr_dens.shape)
+print(sim_data_elec_pot.shape)
+
+sim_data_coords = sim_data_curr_dens[:, 3:]
+print(sim_data_coords.shape)
+
+sim_data_convert = np.zeros((sim_data_coords.shape[0], 7))
+sim_data_convert[:, 0:3] = sim_data_coords
+sim_data_convert[:, 3] = sim_data_elec_pot[:, 0]
+sim_data_convert[:, 4:7] = sim_data_curr_dens[:, 0:3]
+
+np.save(output_path2, sim_data_convert)

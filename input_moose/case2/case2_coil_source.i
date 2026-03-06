@@ -157,3 +157,11 @@ sigma_coil = 62.83185 # Coil's electric conductivity [S/m]
     to_variable = electric_potential
   []
 []
+
+[Outputs]
+  [ParaViewDataCollection]
+    type = MFEMParaViewDataCollection
+    file_base = OutputData/CoilElectrostatic
+    vtk_format = ASCII
+  []
+[]
