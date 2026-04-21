@@ -94,7 +94,7 @@ print()
 
 sim_data = pv.read(input_path + "OutputData/Run0/Cycle000001/proc000000.vtu")
 
-# Extarct data for the cells corresponding to the coil.
+# Extract data for the cells corresponding to the coil.
 sim_data = sim_data.extract_values(values=2, scalars="attribute", preference="cell")
 
 elec_pot_unordered = sim_data["electric_potential"]
