@@ -39,13 +39,13 @@ $$
 -->
 
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}j=\sigma e" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}j=\sigma%20e" />
 </p>
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}e=-\nabla V" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}e=-\nabla%20V" />
 </p>
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}div j=0" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}div%20j=0" />
 </p>
 
 where $\sigma$ are $e$ are electric conductivity and electric field.
@@ -57,10 +57,10 @@ j_n = \frac{I_{coil}}{|\Gamma_{in}|} \quad \qquad \text{on } \Gamma_{\text{in}} 
 $$ -->
 
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}V=0\qquad \qquad \text{on } \Gamma_{\text{out}}" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}V=0\qquad\text{on }\Gamma_{\text{out}}" />
 </p>
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}j_n = \frac{I_{coil}}{|\Gamma_{in}|} \quad \qquad \text{on } \Gamma_{\text{in}}" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}j_n =\frac{I_{coil}}{|\Gamma_{in}|}\qquad\text{on } \Gamma_{\text{in}}" />
 </p>
 
 
