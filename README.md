@@ -33,7 +33,7 @@ In this problem, electric potential and current density are produced in the coil
 $$
 \bm{j} = \sigma \bm{e} \\
 \bm{e} = - \nabla V \\
-\operatorname{div} j = 0 \tag{1}
+div \; j = 0 \tag{1}
 $$
 
 where $\sigma$ are $\bm{e}$ are electric conductivity and electric field.
