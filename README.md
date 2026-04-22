@@ -9,8 +9,8 @@ The same mesh was used for all simulations. This mesh was generated in COMSOL an
 
 <figure>
   <div style="display: flex; gap: 10px;">
-    <img src="./images/mesh_box.png" alt="Mesh - Box" width="50%">
-    <img src="./images/mesh_coil.png" alt="Mesh - Coil" width="50%">
+    <img src="./images/mesh_box.png" alt="Mesh - Box" width="47%">
+    <img src="./images/mesh_coil.png" alt="Mesh - Coil" width="47%">
   </div>
   <figcaption style="text-align: center;">
   Figure 1: Overall box mesh (left) and extracted coil mesh (right).
