@@ -39,22 +39,31 @@ $$
 -->
 
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}j=\sigma%20e" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}j=\sigma e" />
 </p>
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}e=-\nabla%20V" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}e=-\nabla V" />
 </p>
-<p align="right">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}div%20j=0\tag{1}" />
+<p align="center">
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}div j=0" />
 </p>
 
 where $\sigma$ are $e$ are electric conductivity and electric field.
 
 Port boundary conditions (BCs) are defined as follows: 
-$$
+<!-- $$
 V = 0  \qquad \qquad \text{on } \Gamma_{\text{out}}  \\
 j_n = \frac{I_{coil}}{|\Gamma_{in}|} \quad \qquad \text{on } \Gamma_{\text{in}} \tag{2}
-$$
+$$ -->
+
+<p align="center">
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}V=0\qquad \qquad \text{on } \Gamma_{\text{out}}" />
+</p>
+<p align="center">
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}j_n = \frac{I_{coil}}{|\Gamma_{in}|} \quad \qquad \text{on } \Gamma_{\text{in}}" />
+</p>
+
+
 where $\Gamma_{\text{in}}$ and $\Gamma_{\text{out}}$ is the coil's input and output cross sections, and $I_{coil}$ is the applied input current. Eqs. 1 and 2 are solved to obtain $V$, and then $j$ is calculated from $V$.
 
 For this case, $I_{coil} = 2191.9 \; A$, and $\sigma_{coil} = 62.83185 \; S/m$. The space surrounding the coil is assumed to be vacuum.
@@ -147,24 +156,39 @@ Since electric potential values match exactly across the board for all three sol
 ### Problem outline
 
 The current density produced in the coil (Case 1) is applied as a source. Maxwell’s equations are resolved through $a$-formulation where the following applies:
-$$
+
+<!-- $$
 \operatorname{\mathbf{curl}} \bm{a} = \bm{b} \tag{3}
-$$
+$$ -->
+
+<p align="center">
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}curl \; a = b" />
+</p>
 where $\bm{a}$ and $\bm{b}$ are vector potential and magnetic flux density, respectively.
 
 Ampère's law is employed:
-$$
+<!-- $$
 \operatorname{\mathbf{curl}} \bm{h} = \bm{j} \\
 \bm{j} = \sigma \bm{e} \\
 \bm{b} = \mu \bm{h} \tag{4}
-$$
-where $\bm{h}$ and $\mu$ are magnetic field and permeability, respectively.
+$$ -->
+
+<p align="center">
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}curl \; h = j" />
+</p>
+<p align="center">
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}j=\sigma e" />
+</p>
+<p align="center">
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}b=\mu h" />
+</p>
+where $h$ and $\mu$ are magnetic field and permeability, respectively.
 
 For this case, $I_{coil} = 2191.9 \; A$, $\sigma_{coil} = 62.83185 \; S/m$, whereas $\mu = 0 \; H/m$ for all materials. The space surrounding the coil is assumed to be vacuum.
 
 ### Results
 
-Here, the difference between $\bm{b}$ values at Gauss points are compared. Gauss point locations and corresponding values can be directly extracted in NGSolve and COMSOL. However, it is currently not possible to do in MOOSE with MFEM. Consequently, the locations were extracted in NGSolve and COMSOL, compared to ensure that they exactly match, and then they were loaded into MOOSE point sampler to sample the solution.
+Here, the difference between $b$ values at Gauss points are compared. Gauss point locations and corresponding values can be directly extracted in NGSolve and COMSOL. However, it is currently not possible to do in MOOSE with MFEM. Consequently, the locations were extracted in NGSolve and COMSOL, compared to ensure that they exactly match, and then they were loaded into MOOSE point sampler to sample the solution.
 
 #### Match overview
 * Magnetic flux density (B)
