@@ -162,7 +162,7 @@ The current density produced in the coil (Case 1) is applied as a source. Maxwel
 $$ -->
 
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}curl \; a = b" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}curl%20a=b" />
 </p>
 where $\bm{a}$ and $\bm{b}$ are vector potential and magnetic flux density, respectively.
 
@@ -174,13 +174,13 @@ Ampère's law is employed:
 $$ -->
 
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}curl \; h = j" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}curl%20h=j" />
 </p>
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}j=\sigma e" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}j=\sigma%20e" />
 </p>
 <p align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{100}b=\mu h" />
+  <img src="https://latex.codecogs.com/png.image?\dpi{100}b=\mu%20h" />
 </p>
 where $h$ and $\mu$ are magnetic field and permeability, respectively.
 
