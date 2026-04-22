@@ -1,0 +1,10 @@
+gmsh==4.15.0
+matplotlib==3.10.8
+meshio==5.3.5
+netgen==0.3.0
+ngsolve==6.2.2506
+numpy==2.4.4
+pyvale==2026.2.0
+pyvista==0.46.4
+scipy==1.17.1
+seaborn==0.13.2
