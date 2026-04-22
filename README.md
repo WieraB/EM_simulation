@@ -29,11 +29,13 @@ The same mesh was used for all simulations. This mesh was generated in COMSOL an
 ### Problem outline
 
 In this problem, electric potential and current density are produced in the coil. A potential problem is solved to determine electric potential $V$ and then calculate electric current density $j$ within the coil domain $\Omega_{\text{coil}}$. The following equations apply:
+
 $$
 \bm{j} = \sigma \bm{e} \\
 \bm{e} = - \nabla V \\
 \operatorname{div} j = 0 \tag{1}
 $$
+
 where $\sigma$ are $\bm{e}$ are electric conductivity and electric field.
 
 Port boundary conditions (BCs) are defined as follows: 
